@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Play, Pause, Clock, Heart, MoreHorizontal, Search } from "lucide-react";
 import PodcastList from "@/components/PodcastList";
@@ -16,6 +17,7 @@ const Index = () => {
       artist: "",
       currentTime: "0:01",
       duration: "0:30",
+      dateAdded: "0:01 / 0:30",
       coverImage: "/lovable-uploads/7d0cc289-e716-4b20-98d3-0f88321cb724.png"
     },
     {
@@ -24,6 +26,7 @@ const Index = () => {
       artist: "",
       currentTime: "0:00",
       duration: "0:55",
+      dateAdded: "0:00 / 0:55",
       coverImage: "/lovable-uploads/7d0cc289-e716-4b20-98d3-0f88321cb724.png"
     },
     {
@@ -32,6 +35,7 @@ const Index = () => {
       artist: "",
       currentTime: "0:00",
       duration: "0:49",
+      dateAdded: "0:00 / 0:49",
       coverImage: "/lovable-uploads/7d0cc289-e716-4b20-98d3-0f88321cb724.png"
     },
     {
@@ -40,6 +44,7 @@ const Index = () => {
       artist: "",
       currentTime: "0:00",
       duration: "0:53",
+      dateAdded: "0:00 / 0:53",
       coverImage: "/lovable-uploads/7d0cc289-e716-4b20-98d3-0f88321cb724.png"
     },
     {
@@ -48,6 +53,7 @@ const Index = () => {
       artist: "",
       currentTime: "0:03",
       duration: "0:50",
+      dateAdded: "0:03 / 0:50",
       coverImage: "/lovable-uploads/7d0cc289-e716-4b20-98d3-0f88321cb724.png"
     },
     {
@@ -56,6 +62,7 @@ const Index = () => {
       artist: "",
       currentTime: "0:00",
       duration: "0:51",
+      dateAdded: "0:00 / 0:51",
       coverImage: "/lovable-uploads/7d0cc289-e716-4b20-98d3-0f88321cb724.png"
     },
     {
@@ -64,6 +71,7 @@ const Index = () => {
       artist: "",
       currentTime: "0:00",
       duration: "0:24",
+      dateAdded: "0:00 / 0:24",
       coverImage: "/lovable-uploads/7d0cc289-e716-4b20-98d3-0f88321cb724.png"
     }
   ];
@@ -119,7 +127,7 @@ const Index = () => {
             </div>
             
             <div className="md:col-span-3">
-              <div className="bg-[#1a1a1a] rounded-lg p-6">
+              <div className="bg-[#1a1a1a] rounded-lg overflow-hidden">
                 <PodcastHeader />
                 <PodcastList podcasts={podcasts} />
               </div>
