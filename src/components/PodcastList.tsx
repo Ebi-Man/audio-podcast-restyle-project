@@ -1,18 +1,19 @@
 
 import React, { useState } from 'react';
-import { Pause, Play, Heart, MoreHorizontal } from "lucide-react";
+import { Play, Pause, Volume, MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface Podcast {
   id: number;
   title: string;
   artist: string;
-  album: string;
-  addedBy: string;
-  dateAdded: string;
+  album?: string;
+  addedBy?: string;
+  dateAdded?: string;
   duration: string;
+  currentTime?: string;
   isExplicit?: boolean;
-  coverImage: string;
+  coverImage?: string;
 }
 
 interface PodcastListProps {
@@ -21,7 +22,6 @@ interface PodcastListProps {
 
 const PodcastList = ({ podcasts }: PodcastListProps) => {
   const [playing, setPlaying] = useState<number | null>(null);
-  const [liked, setLiked] = useState<Record<number, boolean>>({});
   
   const togglePlay = (id: number) => {
     if (playing === id) {
@@ -31,88 +31,48 @@ const PodcastList = ({ podcasts }: PodcastListProps) => {
     }
   };
   
-  const toggleLike = (id: number) => {
-    setLiked(prev => ({
-      ...prev,
-      [id]: !prev[id]
-    }));
-  };
-  
   return (
-    <div className="space-y-2">
-      {podcasts.map((podcast, index) => (
+    <div className="space-y-1">
+      {podcasts.map((podcast) => (
         <div 
           key={podcast.id}
-          className="grid grid-cols-12 gap-4 px-4 py-2 rounded-md hover:bg-[#2a2a2a] transition-colors items-center text-sm"
+          className="grid grid-cols-12 gap-2 px-4 py-2 rounded-md hover:bg-[#2a2a2a] transition-colors items-center text-xs"
         >
-          <div className="col-span-1 flex items-center justify-center relative group">
-            <span className="group-hover:hidden">{index + 1}</span>
+          <div className="col-span-1 flex items-center justify-center">
             <button 
-              className="hidden group-hover:block focus:outline-none"
+              className="flex items-center justify-center focus:outline-none w-6 h-6"
               onClick={() => togglePlay(podcast.id)}
               aria-label={playing === podcast.id ? "Pause" : "Play"}
             >
-              {playing === podcast.id ? <Pause size={16} /> : <Play size={16} />}
+              {playing === podcast.id ? <Pause size={14} /> : <Play size={14} />}
             </button>
           </div>
           
-          <div className="col-span-4 flex items-center gap-3">
-            <div className="w-10 h-10 bg-gray-700 rounded overflow-hidden flex-shrink-0">
-              <img 
-                src={podcast.coverImage} 
-                alt={`${podcast.title} cover`} 
-                className="w-full h-full object-cover"
-              />
+          <div className="col-span-8 flex items-center">
+            <div className="font-medium uppercase">{podcast.title}</div>
+          </div>
+          
+          <div className="col-span-2 text-right text-gray-400 pr-1">
+            {podcast.currentTime && (
+              <span>{podcast.currentTime} / </span>
+            )}
+            <span>{podcast.duration}</span>
+          </div>
+          
+          <div className="col-span-1 flex items-center justify-center">
+            <Volume size={14} className="text-gray-400" />
+          </div>
+          
+          <div className="col-span-1">
+            <div className="flex items-center justify-end">
+              <MoreHorizontal size={14} className="text-gray-400" />
+              <Button variant="link" className="text-blue-500 hover:text-blue-400 ml-2 p-0 h-auto text-xs">
+                Generate Full Audio
+              </Button>
             </div>
-            <div>
-              <div className="font-medium">{podcast.title}</div>
-              <div className="text-gray-400 text-xs flex items-center gap-1">
-                {podcast.isExplicit && (
-                  <span className="inline-block bg-gray-500 text-white text-[10px] px-1 rounded">E</span>
-                )}
-                {podcast.artist}
-              </div>
-            </div>
-          </div>
-          
-          <div className="col-span-3 hidden md:block text-gray-400">
-            {podcast.album}
-          </div>
-          
-          <div className="col-span-2 hidden md:block text-gray-400 truncate">
-            {podcast.addedBy}
-          </div>
-          
-          <div className="col-span-1 hidden md:block text-gray-400">
-            {podcast.dateAdded}
-          </div>
-          
-          <div className="col-span-1 flex items-center justify-end gap-3">
-            <button 
-              onClick={() => toggleLike(podcast.id)}
-              className="opacity-0 group-hover:opacity-100 focus:opacity-100 hover:text-white transition-colors"
-              aria-label={liked[podcast.id] ? "Unlike" : "Like"}
-            >
-              <Heart 
-                size={16} 
-                className={liked[podcast.id] ? "fill-green-500 text-green-500" : ""} 
-              />
-            </button>
-            <span className="text-gray-400">{podcast.duration}</span>
-            <button className="opacity-0 group-hover:opacity-100 focus:opacity-100 hover:text-white transition-colors">
-              <MoreHorizontal size={16} />
-            </button>
           </div>
         </div>
       ))}
-
-      <div className="pt-4 mt-4 border-t border-[#333]">
-        <div className="flex justify-end">
-          <Button variant="link" className="text-blue-400 hover:text-blue-300">
-            Generate Full Audio
-          </Button>
-        </div>
-      </div>
     </div>
   );
 };

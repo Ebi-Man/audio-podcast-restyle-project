@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Play, Pause, Clock, Heart, MoreHorizontal, Search } from "lucide-react";
 import PodcastList from "@/components/PodcastList";
@@ -9,49 +8,63 @@ import { Button } from "@/components/ui/button";
 const Index = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   
-  // Mock podcast data based on the screenshot
+  // Updated podcast data based on the screenshot
   const podcasts = [
     {
       id: 1,
-      title: "Head & Heart",
-      artist: "Joel Corry, MNEK",
-      album: "Head & Heart (feat. MNEK)",
-      addedBy: "pup31wjhxgolpjor31ctxw...",
-      dateAdded: "Sep 15, 2020",
-      duration: "2:46",
-      coverImage: "/lovable-uploads/fb1f149e-f479-4ed9-b359-8e249b6af995.png"
+      title: "THE HELL-RAISER'S LAST STAND (MOTHER JONES)",
+      artist: "",
+      currentTime: "0:01",
+      duration: "0:30",
+      coverImage: "/lovable-uploads/7d0cc289-e716-4b20-98d3-0f88321cb724.png"
     },
     {
       id: 2,
-      title: "No Love",
-      artist: "Eminem, Lil Wayne",
-      album: "Recovery",
-      addedBy: "pup31wjhxgolpjor31ctxw...",
-      dateAdded: "Sep 15, 2020",
-      duration: "4:59",
-      isExplicit: true,
-      coverImage: "/lovable-uploads/fb1f149e-f479-4ed9-b359-8e249b6af995.png"
+      title: "THE SEEKER'S VISION IN HELL (VIKTOR FRANKL)",
+      artist: "",
+      currentTime: "0:00",
+      duration: "0:55",
+      coverImage: "/lovable-uploads/7d0cc289-e716-4b20-98d3-0f88321cb724.png"
     },
     {
       id: 3,
-      title: "How To Love",
-      artist: "Lil Wayne",
-      album: "Tha Carter IV (Explicit Version)",
-      addedBy: "pup31wjhxgolpjor31ctxw...",
-      dateAdded: "Sep 15, 2020",
-      duration: "4:00",
-      coverImage: "/lovable-uploads/fb1f149e-f479-4ed9-b359-8e249b6af995.png"
+      title: "THE PRISONER WHO BROKE FREE (NELSON MANDELA)",
+      artist: "",
+      currentTime: "0:00",
+      duration: "0:49",
+      coverImage: "/lovable-uploads/7d0cc289-e716-4b20-98d3-0f88321cb724.png"
     },
     {
       id: 4,
-      title: "Lollipop",
-      artist: "Lil Wayne, Static Major",
-      album: "Tha Carter III",
-      addedBy: "pup31wjhxgolpjor31ctxw...",
-      dateAdded: "Sep 15, 2020",
-      duration: "4:59",
-      isExplicit: true,
-      coverImage: "/lovable-uploads/fb1f149e-f479-4ed9-b359-8e249b6af995.png"
+      title: "THE NIGHT RUNNER'S DARING ESCAPE (HARRIET TUBMAN)",
+      artist: "",
+      currentTime: "0:00",
+      duration: "0:53",
+      coverImage: "/lovable-uploads/7d0cc289-e716-4b20-98d3-0f88321cb724.png"
+    },
+    {
+      id: 5,
+      title: "THE SEAT THAT IGNITED A FIRE (ROSA PARKS)",
+      artist: "",
+      currentTime: "0:03",
+      duration: "0:50",
+      coverImage: "/lovable-uploads/7d0cc289-e716-4b20-98d3-0f88321cb724.png"
+    },
+    {
+      id: 6,
+      title: "THE MARCH THAT BROKE AN EMPIRE (MAHATMA GANDHI)",
+      artist: "",
+      currentTime: "0:00",
+      duration: "0:51",
+      coverImage: "/lovable-uploads/7d0cc289-e716-4b20-98d3-0f88321cb724.png"
+    },
+    {
+      id: 7,
+      title: "THE RUNNER'S DEFIANT SPRINT (JESSE OWENS)",
+      artist: "",
+      currentTime: "0:00",
+      duration: "0:24",
+      coverImage: "/lovable-uploads/7d0cc289-e716-4b20-98d3-0f88321cb724.png"
     }
   ];
 
@@ -107,7 +120,6 @@ const Index = () => {
             
             <div className="md:col-span-3">
               <div className="bg-[#1a1a1a] rounded-lg p-6">
-                <h2 className="text-xl font-semibold mb-4">Available Episodes</h2>
                 <PodcastHeader />
                 <PodcastList podcasts={podcasts} />
               </div>
