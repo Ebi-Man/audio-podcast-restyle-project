@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Play, Pause, Volume, MoreHorizontal } from "lucide-react";
+import { Play, Pause, MoreHorizontal, Volume } from "lucide-react";
 
 interface Podcast {
   id: number;
@@ -66,10 +66,7 @@ const PodcastList = ({ podcasts }: PodcastListProps) => {
           </div>
           
           <div className="col-span-2 text-center text-gray-400">
-            {podcast.currentTime && (
-              <span>{podcast.currentTime} / </span>
-            )}
-            <span>{podcast.duration}</span>
+            {podcast.currentTime || "0:00"} / {podcast.duration}
           </div>
           
           <div className="col-span-2 text-right text-gray-400 pr-2 flex items-center justify-end">
