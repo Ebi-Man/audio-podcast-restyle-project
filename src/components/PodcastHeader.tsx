@@ -10,7 +10,8 @@ const PodcastHeader = () => {
         <div className="col-span-4">Title</div>
         <div className="col-span-3 text-center">Preview</div>
         <div className="col-span-2 text-center">Duration</div>
-        <div className="col-span-2 text-right pr-2">Date Added</div>
+        <div className="col-span-1 text-right">Date Added</div>
+        <div className="col-span-1 text-center">Action</div>
       </div>
     </div>
   );

@@ -1,15 +1,15 @@
-
 import { useState } from "react";
 import { Play, Pause, Search } from "lucide-react";
 import PodcastList from "@/components/PodcastList";
 import PodcastHeader from "@/components/PodcastHeader";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { toast } from "@/components/ui/sonner";
 
 const Index = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(true);
   
-  const podcasts = [
+  const [podcasts, setPodcasts] = useState([
     {
       id: 1,
       title: "THE HELL-RAISER'S LAST STAND (MOTHER JONES)",
@@ -73,7 +73,14 @@ const Index = () => {
       dateAdded: "0:00 / 0:24",
       coverImage: "/lovable-uploads/d58d459f-36d2-40b7-9b4c-bc86eb9c086f.png"
     }
-  ];
+  ]);
+
+  const handleDeletePodcast = (id: number) => {
+    setPodcasts(podcasts.filter(podcast => podcast.id !== id));
+    toast("Story deleted", {
+      description: "The story has been removed from your list.",
+    });
+  };
 
   return (
     <div className="min-h-screen bg-[#121212] text-white">
@@ -174,7 +181,7 @@ const Index = () => {
           <div className="mt-4">
             <div className="bg-[#1a1a1a]">
               <PodcastHeader />
-              <PodcastList podcasts={podcasts} />
+              <PodcastList podcasts={podcasts} onDelete={handleDeletePodcast} />
             </div>
           </div>
         </div>

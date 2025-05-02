@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Play, Pause, MoreHorizontal, Volume } from "lucide-react";
+import { Play, Pause, MoreHorizontal, Volume, Trash2 } from "lucide-react";
 
 interface Podcast {
   id: number;
@@ -17,9 +17,10 @@ interface Podcast {
 
 interface PodcastListProps {
   podcasts: Podcast[];
+  onDelete?: (id: number) => void;
 }
 
-const PodcastList = ({ podcasts }: PodcastListProps) => {
+const PodcastList = ({ podcasts, onDelete }: PodcastListProps) => {
   const [playing, setPlaying] = useState<number | null>(null);
   
   const togglePlay = (id: number) => {
@@ -27,6 +28,13 @@ const PodcastList = ({ podcasts }: PodcastListProps) => {
       setPlaying(null);
     } else {
       setPlaying(id);
+    }
+  };
+
+  const handleDelete = (id: number, e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (onDelete) {
+      onDelete(id);
     }
   };
   
@@ -69,9 +77,19 @@ const PodcastList = ({ podcasts }: PodcastListProps) => {
             {podcast.currentTime || "0:00"} / {podcast.duration}
           </div>
           
-          <div className="col-span-2 text-right text-gray-400 pr-2 flex items-center justify-end">
+          <div className="col-span-1 text-right text-gray-400 flex items-center justify-end">
             <span>{podcast.currentTime || "0:00"} / {podcast.duration}</span>
             <Volume size={12} className="text-gray-400 ml-2" />
+          </div>
+
+          <div className="col-span-1 flex items-center justify-center">
+            <button
+              className="flex items-center justify-center p-1 rounded-full hover:bg-red-500 hover:bg-opacity-20 w-7 h-7 transition-colors group"
+              onClick={(e) => handleDelete(podcast.id, e)}
+              aria-label="Delete"
+            >
+              <Trash2 size={16} className="text-gray-400 group-hover:text-red-500" />
+            </button>
           </div>
         </div>
       ))}
